@@ -83,11 +83,15 @@ app.post('/api/feedetails',(req, res) => {
                 "batch": "BATCH DEMO 2025",
                 "installment": "1st SEM",
                 "transactions": [
-                  "Feehead: Tuition Fee",
-                  "Amount: 20000.00",
-                  "Method: Credit Card",
-                  "Status: Cash Received",
-                  "Processed by: JANE SMITH"
+                    {
+                        "Feehead": "Tuition Fee",
+                        "Amount": "20000.00",
+                        "Method": "Credit Card",
+                        "Status": "Cash Received",
+                        "Processed by": "JANE SMITH"
+
+
+                    }
                 ]
               }
             ]
@@ -103,11 +107,14 @@ app.post('/api/feedetails',(req, res) => {
                 "batch": "BATCH DEMO 2025",
                 "installment": "2nd SEM",
                 "transactions": [
-                  "Feehead: Hostel Fee",
-                  "Amount: 15000.00",
-                  "Method: Net Banking",
-                  "Status: Pending",
-                  "Processed by: MARK WILSON"
+                    {
+                  "Feehead": "Hostel Fee",
+                  "Amount" : "15000.00",
+                  "Method" : "Net Banking",
+                  "Status" : "Pending",
+                  "Processed by": "MARK WILSON"
+                    }
+                  
                 ]
               }
             ]
@@ -127,6 +134,90 @@ app.post('/api/feedetails',(req, res) => {
     }
 
 })
+
+
+app.post('/api/new/feedetails',(req, res) => {
+
+    const { id, password, api_key, from_date, to_date } = req.body;
+    
+    const staticResponse3 = {
+            "FeeDetails": [
+              {
+                "ReceiptInfo": [
+                  {
+                    "receipt_no": "0001001",
+                    "admission_no": "01-DEMO-BATCH-01",
+                    "name": "JOHN DOE",
+                    "date": "05/03/2025",
+                    "unireg_no": "DEMO2025UNIREG01",
+                    "batch": "BATCH DEMO 2025",
+                    "installment": "1st SEM",
+                    "Feehead": "Tuition Fee",
+                    "Amount": "20000.00",
+                    "Method": "Credit Card",
+                    "Status": "Cash Received",
+                    "Processed by": "JANE SMITH",
+                  },
+                  {
+                    "receipt_no": "0001001",
+                    "admission_no": "01-DEMO-BATCH-01",
+                    "name": "JOHN DOE",
+                    "date": "05/03/2025",
+                    "unireg_no": "DEMO2025UNIREG01",
+                    "batch": "BATCH DEMO 2025",
+                    "installment": "1st SEM",
+                    "Feehead": "Hostel Fee",
+                    "Amount": "15000.00",
+                    "Method": "Net Banking",
+                    "Status": "Pending",
+                    "Processed by": "MARK WILSON",
+                  },
+                  {
+                    "receipt_no": "0001002",
+                    "admission_no": "02-DEMO-BATCH-02",
+                    "name": "ALICE JOHNSON",
+                    "date": "07/03/2025",
+                    "unireg_no": "DEMO2025UNIREG02",
+                    "batch": "BATCH DEMO 2025",
+                    "installment": "2nd SEM",
+                    "Feehead": "Hostel Fee",
+                    "Amount": "15000.00",
+                    "Method": "Net Banking",
+                    "Status": "Pending",
+                    "Processed by": "MARK WILSON",
+                  },
+                  {
+                    "receipt_no": "0001002",
+                    "admission_no": "02-DEMO-BATCH-02",
+                    "name": "ALICE JOHNSON",
+                    "date": "07/03/2025",
+                    "unireg_no": "DEMO2025UNIREG02",
+                    "batch": "BATCH DEMO 2025",
+                    "installment": "2nd SEM",
+                    "Feehead": "Tuition Fee",
+                    "Amount": "20000.00",
+                    "Method": "Credit Card",
+                    "Status": "Cash Received",
+                    "Processed by": "JANE SMITH",
+                  }
+                ]
+              }
+            ]
+          }
+          
+    if (
+        id === "demo_id" &&
+        password === "demo_password" &&
+        api_key === "demo_api_key" &&
+        from_date && to_date
+    ) {
+        res.json(staticResponse3);
+    } else {
+        res.status(401).json({ message: "Unauthorized access or invalid request" });
+    }
+
+})
+
 
 // Start the server
 app.listen(port, () => {
